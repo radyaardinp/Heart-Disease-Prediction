@@ -64,25 +64,22 @@ Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
 Data Preparation
 Pada tahap ini, dilakukan serangkaian proses untuk menyiapkan data sebelum masuk ke proses pelatihan model. Langkah-langkah yang dilakukan disusun secara sistematis untuk memastikan data bersih, konsisten, dan relevan dengan tujuan klasifikasi. Berikut adalah tahapan data preparation yang dilakukan:
 
-**1. Menghapus Duplikasi**
-Langkah awal dilakukan pengecekan dan penghapusan data duplikat agar tidak memengaruhi hasil pelatihan model. Data duplikat dapat menyebabkan bias dan overfitting pada algoritma.
+**1. Encoding Variabel Kategorikal**
+Beberapa fitur memiliki tipe data kategorikal yang tidak dapat langsung digunakan oleh model machine learning menggunakan teknik Label encoding 
 
 **2. Menangani Data Kosong (Missing Values)**
 Ditemukan beberapa nilai kosong (NaN) pada kolom Alcohol Intake. Oleh karena itu nilai kosong tersebut dilakukan tahapan imputasi data diisi menggunakan mean (nilai rata-rata).
 
-**3. Encoding Variabel Kategorikal**
-Beberapa fitur memiliki tipe data kategorikal yang tidak dapat langsung digunakan oleh model machine learning menggunakan teknik Label encoding 
-
-**4. Feature Scaling**
+**3. Feature Scaling**
 Agar model dapat belajar secara optimal, fitur numerik seperti Cholesterol, Blood Pressure, Heart Rate, Exercise Hours, Stress Level, dan Blood Sugar dinormalisasi menggunakan Min-Max Scaling ke rentang 0–1. Ini bertujuan untuk menyamakan skala antar fitur sehingga tidak mendominasi satu sama lain saat model dilatih.
 ![image](https://github.com/user-attachments/assets/33f2b8fe-1682-4837-9dc9-50f416d71ddd)
 
-**5. Pemisahan Fitur dan Label**
+**4. Pemisahan Fitur dan Label**
 Data dipisahkan menjadi:
 Fitur (X): Seluruh kolom kecuali Heart Disease
 Label (y): Kolom Heart Disease yang menjadi target klasifikasi
 
-**6. Split Data**
+**5. Split Data**
 Data dibagi menjadi data latih dan data uji dengan rasio 80:20 menggunakan train_test_split. 
 
 
