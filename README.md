@@ -7,20 +7,22 @@
   Dari penelitian di atas, Penelitian ini menghadirkan kebaruan melalui penggunaan dataset dari platform Kaggle yang berjudul _Heart Disease Prediction Dataset_, yang berisi data medis terstruktur untuk mendukung proses klasifikasi penyakit jantung. Dalam proses analisis, digunakan tiga algoritma machine learning, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN), yang telah terbukti memiliki performa baik dalam berbagai penelitian terdahulu. Setelah model dilatih dan dievaluasi, algoritma dengan hasil terbaik akan dipilih untuk menjalani proses hyperparameter tuning guna memaksimalkan akurasi prediksi. Dengan langkah ini, diharapkan model yang dikembangkan dapat menghasilkan prediksi yang akurat dan dapat diandalkan, khususnya dalam mendukung pengambilan keputusan di bidang medis untuk deteksi dini penyakit jantung.
 
 referensi:
-
+1. Cardiovascular diseases (CVDs). (2021, June 11). World Health Organization (WHO). Retrieved May 27, 2025, from https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)
+2. Chandra, K., & Prasetyo, J. S. (2024, September). Prediksi Penyakit Jantung Koroner Menggunakan Metode K-NN dan Regresi Logistik Berdasarkan Kerangka Kerja CRISP-DM. Prosiding SENAM 2024: Sistem Informasi & Informatika Vol. 4, 4, 241-248. https://ocs.machung.ac.id/index.php/seminarnasionalmachung/article/view/554
+3. Hidayat, R., Sy, Y. S., Teguh Sujana, Mirdatul Husnah, Saputra, H. T., & Okmayura, F. (2024, September). Implementasi Machine Learning Untuk Prediksi Penyakit Jantung Menggunakan Algoritma Support Vector Machine. BIOS : Jurnal Teknologi Informasi dan Rekayasa Komputer, 5(2), 161-168. https://bios.sinergis.org/bios/article/view/152/68
 
 ## Business Understanding
-### Problem Statements
+#### Problem Statements
 1. Bagaimana cara mengklasifikasikan apakah seseorang berisiko terkena penyakit jantung atau tidak berdasarkan data medis yang tersedia?
 2. Algoritma machine learning apa yang paling efektif dalam memprediksi penyakit jantung pada dataset yang digunakan?
 3. Bagaimana cara meningkatkan performa model prediksi agar akurasi klasifikasi menjadi lebih optimal?
 
-### Goals
+#### Goals
 1. Mengembangkan model klasifikasi yang mampu mengidentifikasi risiko penyakit jantung berdasarkan fitur-fitur medis pasien.
 2. Membandingkan performa tiga algoritma machine learning, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN) dalam memprediksi penyakit jantung.
 3. Melakukan optimasi model terbaik menggunakan hyperparameter tuning untuk memperoleh hasil prediksi yang lebih akurat.
 
-### Solution Statements
+#### Solution Statements
 1. Mengimplementasikan dan membandingkan tiga algoritma machine learning, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN), menggunakan dataset dari Kaggle.
 2. Melakukan proses evaluasi model menggunakan metrik seperti akurasi, precision, recall, dan F1-score untuk mengetahui algoritma dengan performa terbaik.
 3. Menerapkan teknik hyperparameter tuning (misalnya GridSearchCV) pada algoritma terbaik untuk meningkatkan kinerja model secara signifikan.
@@ -29,7 +31,7 @@ referensi:
 Dataset yang digunakan dalam penelitian ini adalah [Heart Disease Prediction Dataset](https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset/data) dari platform kaggle. Dataset ini berisi 1000 data rekam medis pasien yang dengan 16 atribut klinis dan kebiasaan gaya hidup yang berkaitan dengan risiko penyakit jantung. Data ini digunakan untuk melakukan klasifikasi biner, yaitu memprediksi apakah seorang individu memiliki penyakit jantung (1) atau tidak (0), yang ditunjukkan oleh kolom Heart Disease.
 
 Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
-### Variabel Pada Heart Disease Dataset
+##### Variabel Pada Heart Disease Dataset
 
 | Nama Kolom                | Deskripsi                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -50,7 +52,7 @@ Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
 | `Chest Pain Type`         | Jenis nyeri dada yang dirasakan (Atypical Angina, Typical Angina, Non-anginal Pain, Asymptomatic) |
 | `Heart Disease`           | Label target: 1 jika pasien memiliki penyakit jantung, 0 jika tidak                               |
 
-### Insight yang di dapat dari data 
+#### Insight yang di dapat dari data 
 - Distribusi label target tidak seimbang, yang artinya adalah Jumlah pasien yang tidak mengalami penyakit jantung memiliki rasio lebih banyak dari pada pasien yang memiliki penyakit jantung. 
 
    ![image](https://github.com/user-attachments/assets/03a0b82b-6270-436d-a22a-9514cdab545e)
@@ -83,7 +85,8 @@ Label (y): Kolom Heart Disease yang menjadi target klasifikasi
 **6. Split Data**
 Data dibagi menjadi data latih dan data uji dengan rasio 80:20 menggunakan train_test_split. 
 
-# Modeling
+
+## Modeling
 Dalam proyek ini, tiga algoritma machine learning digunakan untuk memodelkan prediksi penyakit jantung, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN). Data dibagi menjadi dua bagian menggunakan teknik train-test split dengan rasio 80:20, di mana 80% data digunakan untuk pelatihan dan 20% sisanya untuk pengujian.
 
 **1. Logistic Regression (LR)**
@@ -112,7 +115,7 @@ Setelah ketiga model dilatih dan diuji, didapatkan performa awal sebagai berikut
 | SVM (Awal)          | 0.930   |
 | KNN                 | 0.875   |
 
-### Hyperparameter Tuning
+#### Hyperparameter Tuning
 Berdasarkan hasil evaluasi awal, model SVM menunjukkan akurasi terbaik. Oleh karena itu, dilakukan proses optimalisasi model ini menggunakan teknik GridSearchCV untuk mencari kombinasi parameter terbaik melalui validasi silang.
 
 Parameter Grid yang Digunakan:
@@ -130,19 +133,24 @@ Best Parameters: C=10, gamma=0.001, kernel='rbf'
 
 Best Cross-validation Accuracy: 0.9275
 
+
 ## Evaluasi
 Untuk mengevaluasi performa model dalam memprediksi penyakit jantung, digunakan beberapa metrik evaluasi berikut:
 
 **1. Accuracy**: Proporsi prediksi yang benar dari seluruh prediksi yang dilakukan oleh model.
+
 ![image](https://github.com/user-attachments/assets/fc9cf6bd-eafc-4288-a8e0-3527efa851a5)
 
 **2. Precision**: Proporsi prediksi positif yang benar-benar positif.
+
 ![image](https://github.com/user-attachments/assets/d1ee87aa-00bb-4e85-a94e-0ee92794d2dc)
 
 **3. Recall** : Proporsi kasus positif yang berhasil dideteksi oleh model.
+
 ![image](https://github.com/user-attachments/assets/d4bd7a6c-2138-4901-bf86-69ddb1842780)
 
 **4. F1-Score** : Rata-rata harmonik dari precision dan recall.
+
 ![image](https://github.com/user-attachments/assets/80900861-6351-4824-9f84-4b7ee1e2497d)
 
 Keterangan:
@@ -151,7 +159,7 @@ Keterangan:
 - FP (False Positive): Model memprediksi positif, sebenarnya negatif
 - FN (False Negative): Model memprediksi negatif, sebenarnya positif
 
-### Hasil Evaluasi Model
+#### Hasil Evaluasi Model
 |             Model            |  Accuracy  |	Precision	| Recall	| F1-Score|
 |------------------------------|------------|-----------|---------|---------|
 |Logistic Regression           |    0.86    |    0.84 	|   0.82	|   0.83  |
@@ -159,7 +167,8 @@ Keterangan:
 |Support Vector Machine (SVM)  |	  0.93    |    0.96	  |   0.87  |   0.91  |
 |SVM (Optimized)               |  	0.92    |    0.90   |   0.90  |   0.90  |
 
-### Kesimpulan
+
+## Kesimpulan
 Berdasarkan hasil evaluasi model menggunakan metrik akurasi, presisi, recall, dan F1-score, diperoleh bahwa:
 - Model SVM awal memberikan akurasi tertinggi sebesar 93%, dengan presisi dan recall yang cukup seimbang untuk kedua kelas.
 - Setelah dilakukan hyperparameter tuning menggunakan GridSearchCV, akurasi menurun sedikit menjadi 92%, namun model menjadi lebih seimbang dalam mendeteksi kedua kelas, dengan precision dan recall untuk kelas 1 meningkat dibanding Logistic Regression dan KNN.
