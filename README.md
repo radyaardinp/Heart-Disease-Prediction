@@ -28,7 +28,7 @@ referensi:
 3. Menerapkan teknik hyperparameter tuning (misalnya GridSearchCV) pada algoritma terbaik untuk meningkatkan kinerja model secara signifikan.
 
 ## Data Understanding
-Dataset yang digunakan dalam penelitian ini adalah [Heart Disease Prediction Dataset](https://www.kaggle.com/datasets/muratkokludataset/rice-image-dataset/data) dari platform kaggle. Dataset ini berisi 1000 data rekam medis pasien yang dengan 16 atribut klinis dan kebiasaan gaya hidup yang berkaitan dengan risiko penyakit jantung. Data ini digunakan untuk melakukan klasifikasi biner, yaitu memprediksi apakah seorang individu memiliki penyakit jantung (1) atau tidak (0), yang ditunjukkan oleh kolom Heart Disease.
+Dataset yang digunakan dalam penelitian ini adalah [Heart Disease Prediction Dataset](https://www.kaggle.com/datasets/rashadrmammadov/heart-disease-prediction) dari platform kaggle. Dataset ini berisi 1000 data rekam medis pasien yang dengan 16 atribut klinis dan kebiasaan gaya hidup yang berkaitan dengan risiko penyakit jantung. Data ini digunakan untuk melakukan klasifikasi biner, yaitu memprediksi apakah seorang individu memiliki penyakit jantung (1) atau tidak (0), yang ditunjukkan oleh kolom Heart Disease.
 
 Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
 ##### Variabel Pada Heart Disease Dataset
