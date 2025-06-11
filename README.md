@@ -35,22 +35,22 @@ Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
 
 | Nama Kolom                | Deskripsi                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Age`                     | Usia pasien (dalam tahun)                                                                         |
-| `Gender`                  | Jenis kelamin pasien (Male / Female)                                                              |
-| `Cholesterol`             | Kadar kolesterol pasien (dalam mg/dL)                                                             |
-| `Blood Pressure`          | Tekanan darah pasien saat istirahat (dalam mm Hg)                                                 |
-| `Heart Rate`              | Detak jantung pasien (denyut per menit)                                                           |
-| `Smoking`                 | Status merokok pasien (Never, Current, Former)                                                    |
-| `Alcohol Intake`          | Frekuensi konsumsi alkohol (Heavy, Moderate, atau kosong/NaN)                                     |
-| `Exercise Hours`          | Jumlah jam olahraga per minggu                                                                    |
-| `Family History`          | Riwayat keluarga dengan penyakit jantung (Yes / No)                                               |
-| `Diabetes`                | Apakah pasien memiliki diabetes (Yes / No)                                                        |
-| `Obesity`                 | Apakah pasien mengalami obesitas (Yes / No)                                                       |
-| `Stress Level`            | Tingkat stres pasien (skala numerik, kemungkinan 1–10)                                            |
-| `Blood Sugar`             | Kadar gula darah pasien (mg/dL)                                                                   |
-| `Exercise Induced Angina` | Apakah pasien mengalami angina akibat olahraga (Yes / No)                                         |
-| `Chest Pain Type`         | Jenis nyeri dada yang dirasakan (Atypical Angina, Typical Angina, Non-anginal Pain, Asymptomatic) |
-| `Heart Disease`           | Label target: 1 jika pasien memiliki penyakit jantung, 0 jika tidak                               |
+| Age                       | Usia pasien (dalam tahun)                                                                         |
+| Gender                    | Jenis kelamin pasien (Male / Female)                                                              |
+| Cholesterol               | Kadar kolesterol pasien (dalam mg/dL)                                                             |
+| Blood Pressure            | Tekanan darah pasien saat istirahat (dalam mm Hg)                                                 |
+| Heart Rate                | Detak jantung pasien (denyut per menit)                                                           |
+| Smoking                   | Status merokok pasien (Never, Current, Former)                                                    |
+| Alcohol Intake            | Frekuensi konsumsi alkohol (Heavy, Moderate, atau kosong/NaN)                                     |
+| Exercise Hours            | Jumlah jam olahraga per minggu                                                                    |
+| Family History            | Riwayat keluarga dengan penyakit jantung (Yes / No)                                               |
+| Diabetes                  | Apakah pasien memiliki diabetes (Yes / No)                                                        |
+| Obesity                   | Apakah pasien mengalami obesitas (Yes / No)                                                       |
+| Stress Level              | Tingkat stres pasien (skala numerik, kemungkinan 1–10)                                            |
+| Blood Sugar               | Kadar gula darah pasien (mg/dL)                                                                   |
+| Exercise Induced Angina   | Apakah pasien mengalami angina akibat olahraga (Yes / No)                                         |
+| Chest Pain Type           | Jenis nyeri dada yang dirasakan (Atypical Angina, Typical Angina, Non-anginal Pain, Asymptomatic) |
+| Heart Disease             | Label target: 1 jika pasien memiliki penyakit jantung, 0 jika tidak                               |
 
 #### Insight yang di dapat dari data 
 - Distribusi label target tidak seimbang, yang artinya adalah Jumlah pasien yang tidak mengalami penyakit jantung memiliki rasio lebih banyak dari pada pasien yang memiliki penyakit jantung. 
@@ -94,27 +94,32 @@ Data dibagi menjadi data latih dan data uji dengan rasio 80:20 menggunakan train
 
 
 ## Modeling
-Dalam proyek ini, tiga algoritma machine learning digunakan untuk memodelkan prediksi penyakit jantung, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN). Data dibagi menjadi dua bagian menggunakan teknik train-test split dengan rasio 80:20, di mana 80% data digunakan untuk pelatihan dan 20% sisanya untuk pengujian.
+Dalam proyek ini, tiga algoritma machine learning digunakan untuk memodelkan prediksi penyakit jantung, yaitu Logistic Regression (LR), Support Vector Machine (SVM), dan K-Nearest Neighbors (KNN). Dataset dibagi menggunakan teknik train-test split dengan rasio 80:20, di mana 80% data digunakan untuk pelatihan dan 20% sisanya untuk pengujian.
 
-**1. Logistic Regression (LR)**
-Logistic Regression adalah algoritma klasifikasi yang sederhana dan interpretatif, cocok untuk memodelkan hubungan antara satu atau lebih variabel independen dengan variabel dependen kategorikal.
-
-Parameter yang digunakan:
-- random_state=42: untuk menjaga hasil tetap konsisten.
-- max_iter=1000: meningkatkan jumlah iterasi agar model dapat konvergen.
-
-**2. Support Vector Machine (SVM)**
-SVM bertujuan mencari hyperplane optimal yang memisahkan kelas-kelas dalam data. Metode ini efektif dalam menangani data berdimensi tinggi dan non-linear (terutama dengan kernel RBF).
+#### 1. Logistic Regression (LR)
+Logistic Regression adalah algoritma klasifikasi yang digunakan untuk memodelkan probabilitas dari suatu observasi ke dalam kelas tertentu. Algoritma ini menggunakan fungsi logistik (sigmoid) untuk mengubah output linear menjadi probabilitas antara 0 dan 1. Proses pelatihan dilakukan dengan meminimalkan log loss melalui metode gradient descent.
 
 Parameter yang digunakan:
-random_state=42: agar hasil konsisten.
 
-**3. K-Nearest Neighbors (KNN)**
-KNN mengklasifikasikan data berdasarkan mayoritas kelas dari k tetangga terdekat (berdasarkan jarak). Algoritma ini mudah dipahami dan diimplementasikan, namun sensitif terhadap skala fitur dan pemilihan nilai k.
+`random_state=42`: Menjamin reprodusibilitas hasil
+
+`max_iter=1000`: Menentukan jumlah iterasi maksimum agar model dapat konvergen, terutama saat jumlah fitur banyak
+
+#### 2. Support Vector Machine (SVM)
+SVM bertujuan menemukan hyperplane optimal yang memisahkan dua kelas dengan margin maksimum. Titik data yang berada paling dekat dengan hyperplane disebut support vectors, dan mereka sangat menentukan posisi hyperplane. Untuk data yang tidak linear, SVM dapat menggunakan kernel trick seperti RBF untuk memproyeksikan data ke dimensi yang lebih tinggi agar dapat dipisahkan secara linear.
 
 Parameter yang digunakan:
-n_neighbors=5: jumlah tetangga yang dipertimbangkan.
 
+`random_state=42`: Agar hasil model konsisten setiap kali dijalankan
+
+#### 3. K-Nearest Neighbors (KNN)
+KNN adalah algoritma berbasis instance-based learning. Untuk mengklasifikasikan suatu data baru, algoritma menghitung jarak Euclidean ke seluruh data pelatihan, kemudian mengambil k tetangga terdekat dan menentukan kelas berdasarkan voting mayoritas. Model ini tidak membutuhkan pelatihan eksplisit, tetapi performanya sangat bergantung pada nilai k dan skala fitur.
+
+Parameter yang digunakan:
+
+`n_neighbors=5`: Menentukan jumlah tetangga terdekat yang digunakan dalam voting
+
+---- 
 Setelah ketiga model dilatih dan diuji, didapatkan performa awal sebagai berikut:
 | Model               | Akurasi |
 | ------------------- | ------- |
@@ -123,7 +128,7 @@ Setelah ketiga model dilatih dan diuji, didapatkan performa awal sebagai berikut
 | KNN                 | 0.875   |
 
 #### Hyperparameter Tuning
-Berdasarkan hasil evaluasi awal, model SVM menunjukkan akurasi terbaik. Oleh karena itu, dilakukan proses optimalisasi model ini menggunakan teknik GridSearchCV untuk mencari kombinasi parameter terbaik melalui validasi silang.
+Berdasarkan hasil evaluasi awal, model SVM menunjukkan akurasi terbaik. Oleh karena itu, dilakukan proses optimalisasi model ini menggunakan teknik **GridSearchCV**. Proses ini dilakukan dengan menguji setiap kombinasi parameter melalui validasi silang dan memilih kombinasi yang memberikan hasil akurasi terbaik. Setelah itu, model akan dilatih ulang menggunakan parameter terbaik tersebut untuk menghasilkan performa yang optimal.
 
 Parameter Grid yang Digunakan:
 
@@ -135,10 +140,10 @@ C: [0.1, 1, 10, 100],         # Parameter regularisasi``
 ``kernel: ['rbf', 'linear']     # Jenis kernel``
 
 
-Hasil Tuning:
-Best Parameters: C=10, gamma=0.001, kernel='rbf'
+Hasil Tuning terbaik:
+- Best Parameters: `C=10` , `gamma=0.001`, `kernel='rbf'`
 
-Best Cross-validation Accuracy: 0.9275
+- Best Cross-validation Accuracy: 0.9275
 
 
 ## Evaluasi
