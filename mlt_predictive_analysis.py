@@ -11,6 +11,8 @@ Original file is located at
 - **Dataset:** https://www.kaggle.com/datasets/rashadrmammadov/heart-disease-prediction
 
 # Import Library
+
+Langkah pertama adalah melakukan import library yang dibutuhkan
 """
 
 #Import library python
@@ -27,7 +29,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from google.colab import drive
 
-"""# Loading Data"""
+"""# Loading Data
+
+Langkah selanjutnya adalah melakukan mounting Google Drive dan membaca dataset CSV ke dalam DataFrame df untuk analisis.
+"""
 
 #membaca dataset
 drive.mount('/content/drive')
@@ -37,23 +42,36 @@ dataset_path = '/content/drive/MyDrive/TUGAS CODING CAMP/ML Terapan/dataset_hear
 df = pd.read_csv(dataset_path)
 df
 
+"""kemudian memeriksa ukuran data untuk mengetahui berapa jumlah baris dan kolom pada dataset yang dimiliki"""
+
 # Memeriksa ukuran data
 df.shape
 
-"""# Data Preprocessing"""
+"""# Data Preprocessing
+
+Memeriksa nilai kosong yang ada pada dataset
+"""
 
 #Memeriksa missing value
 df.isnull().sum()
 
-"""Terdapat missing value pada kolom 'Alcohol Intake'. nilai kosong tersebut harus dilakukan penanganan"""
+"""dari hasil di atas, terdapat missing value pada kolom 'Alcohol Intake'. nilai kosong tersebut harus dilakukan penanganan
+
+selanjutnya adalah memeriksa tipe data. apakah tipe data yang ada sudah sesuai atau belum. jika belum sesuai, maka akan dilakukan penyesuaian tipe data
+"""
 
 #Memeriksa tipe data
 df.info()
 
+"""selanjutnya adala memeriksa nilai duplikat"""
+
 #Memeriksa nilai duplikat
 df.duplicated().sum()
 
-"""Tidak terdapat nilai duplikat pada dataset ini"""
+"""dari hasil di atas, pada dataset heart disease prediction tidak memiliki nilai yang duplikat
+
+Membuat visualisasi dan menampilkan jumlah masing-masing kelas untuk melihat keseimbangan data antara penderita dan non-penderita penyakit jantung.
+"""
 
 # Checking the balance of classes (Heart Disease vs. No Heart Disease)
 plt.figure(figsize=(6, 4))
@@ -68,6 +86,8 @@ plt.show()
 class_counts = df['Heart Disease'].value_counts()
 print("Class distribution:\n", class_counts)
 
+"""Membuat visualisasi untuk melihat distribusi umur pasien keseluruhan"""
+
 # visualisasi distribusi umur
 plt.figure(figsize=(10, 6))
 sns.histplot(data=df, x='Age', kde=True, bins=30)
@@ -75,6 +95,8 @@ plt.title('Distribution of Age')
 plt.xlabel('Age')
 plt.ylabel('Frequency')
 plt.show()
+
+"""selanjutnya adalah membuat grafik batang untuk melihat distribusi fitur kategorikal terhadap kondisi penyakit jantung."""
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -113,6 +135,11 @@ numerical_cols = df.select_dtypes(include=['int', 'float']).columns.tolist()
 print("Categorical column:", categorical_cols)
 print("Numerical column:", numerical_cols)
 
+"""Selanjutnya adalah Mengubah data kategorikal menjadi format numerik menggunakan LabelEncoder agar bisa digunakan oleh algoritma machine learning.
+
+
+"""
+
 # Columns to encode
 cols_to_encode = ['Gender', 'Smoking', 'Alcohol Intake', 'Family History', 'Diabetes', 'Obesity', 'Exercise Induced Angina', 'Chest Pain Type']
 
@@ -125,6 +152,8 @@ for col in cols_to_encode:
 print("DataFrame after encoding:")
 df.head()
 
+"""Langkah selanjutnya adalah melakukan penanganan missing value pada kolom alcohol intake dengan nilai mean."""
+
 # Mengatasi missing value pada kolom 'Alcohol Intake' dengan nilai mean
 mean_alcohol_intake = df['Alcohol Intake'].mean()
 df['Alcohol Intake'].fillna(mean_alcohol_intake, inplace=True)
@@ -132,6 +161,8 @@ df['Alcohol Intake'].fillna(mean_alcohol_intake, inplace=True)
 # Memeriksa kembali missing value setelah pengisian
 print("\nMissing values after imputation:")
 print(df.isnull().sum())
+
+"""Membuat boxplot untuk mengidentifikasi outlier pada fitur numerik seperti usia, tekanan darah, kolesterol, dan fitur numerik lainnya."""
 
 #Memeriksa outlier pada fitur selain kategorikal, yaitu fitur 'Age', 'Cholesterol', 'Blood Pressure', 'Heart Rate', 'Exercise Hours', 'Stress Level', 'Blood Sugar'
 
@@ -146,6 +177,10 @@ plt.ylabel('Values')
 # Show the plot
 plt.show()
 
+"""Sebelum masuk ke dalam tahap pemodelan.data akan dipisahkan fitur (X) dan target (y), lalu melakukan normalisasi fitur menggunakan MinMaxScaler agar berada dalam rentang 0–1.
+
+"""
+
 # Pisahkan fitur dan target
 X = df.drop('Heart Disease', axis=1)
 y = df['Heart Disease']
@@ -155,12 +190,13 @@ scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 X_scaled
 
-"""setelah itu kita akan menggunakan metode minmax scaler untuk melakukan scaling. scaling dilakukan dengan tujuan untuk menyamaratakan nilai pada dataset agar selisih dari setiap data tidak terlalu jauh."""
-
 df_scaled = pd.DataFrame(X_scaled, columns=X.columns)
 df_scaled.head()
 
-"""DataFrame di atas merupakan hasil dari transformasi minmax scaling pada setiap atribut/fitur pada dataset heart disease."""
+"""DataFrame di atas merupakan hasil dari transformasi minmax scaling pada setiap atribut/fitur pada dataset heart disease.
+
+langkah terakhir sebelum pemodelan adalah Membagi data menjadi data latih dan data uji dengan proporsi 80:20 untuk keperluan pelatihan dan evaluasi model.
+"""
 
 # Bagi data menjadi train dan test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -170,6 +206,9 @@ X_train.shape, X_test.shape
 y_train.shape, y_test.shape
 
 """# Pemodelan
+
+Pada tahap ini, akan dilakukan pemodelan menggunakan tiga algoritma klasifikasi, yaitu Support Vector Machine (SVM), K-Nearest Neighbors (KNN), dan Logistic Regression (LR). Setiap model akan dilatih dan dievaluasi untuk melihat performanya dalam mendeteksi penyakit jantung.
+Model dengan akurasi terbaik selanjutnya akan digunakan untuk proses hyperparameter tuning guna meningkatkan performa prediksi secara optimal.
 
 #### Support Vector Machine (SVM)
 """
@@ -189,6 +228,7 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_svm))
 print("\nAccuracy:", accuracy_score(y_test, y_pred_svm))
 print("\nClassification Report:\n", classification_report(y_test, y_pred_svm))
 
+#Membuat learning curve
 train_sizes, train_scores, test_scores = learning_curve(
     svm_model, X, y, cv=5, n_jobs=-1, train_sizes=np.linspace(0.1, 1.0, 10))
 
@@ -216,7 +256,10 @@ plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
 plt.legend(loc="best")
 plt.show()
 
-"""#### Logistic Regression (LR)"""
+"""Hasil learning curve di atas menunjukkan kinerja model SVM yang terus meningkat seiring bertambahnya jumlah data latih. Skor pada data pelatihan dan validasi cenderung mendekati dan stabil di angka tinggi, menandakan bahwa model memiliki kemampuan generalisasi yang baik tanpa indikasi overfitting atau underfitting yang signifikan.
+
+#### Logistic Regression (LR)
+"""
 
 # Inisialisasi model Logistic Regression
 lr_model = LogisticRegression(random_state=42, max_iter=1000) # Increase max_iter if convergence warnings occur
@@ -262,7 +305,10 @@ plt.plot(train_sizes_lr, test_scores_mean_lr, 'o-', color="g",
 plt.legend(loc="best")
 plt.show()
 
-"""#### K-Nearest Neighbour (KNN)"""
+"""Learning curve untuk model Logistic Regression ini menunjukkan bahwa performa model cukup stabil baik pada data pelatihan maupun validasi. Terdapat sedikit gap antara skor pelatihan dan validasi, namun tidak terlalu besar, yang menandakan bahwa model mampu melakukan generalisasi dengan baik meskipun tidak sebaik model SVM.
+
+#### K-Nearest Neighbour (KNN)
+"""
 
 # Inisialisasi model KNN
 # Anda bisa mencoba beberapa nilai k (jumlah tetangga terdekat)
@@ -308,6 +354,12 @@ plt.legend(loc="best")
 plt.grid()
 plt.show()
 
+"""Learning curve untuk model K-Nearest Neighbors (KNN) menunjukkan bahwa model memiliki skor pelatihan yang tinggi dan terus meningkat seiring bertambahnya data, namun terdapat kesenjangan yang cukup signifikan dengan skor validasi. Hal ini mengindikasikan bahwa model cenderung mengalami overfitting, yaitu sangat baik dalam mempelajari data pelatihan tetapi kurang optimal dalam melakukan generalisasi terhadap data baru.
+
+-----------
+selanjutnya akan dilakukan perbandingan akurasi dari ketiga model
+"""
+
 #Membandingkan hasil akurasi dari 3 pemodelan
 results = {
     'Model': ['Logistic Regression', 'SVM', 'KNN'],
@@ -322,6 +374,8 @@ results_df
 """Dari tabel di atas didapatkan model SVM memiliki nilai akurasi yang lebih tinggi daripada model Logistic Regression dan KNN. Setelah itu akan dilakukan optimalisasi model menggunakan hyperparameter tuning GridSearch untuk mendapatkan nilai parameter dan akurasi yang paling optimal dari model SVM
 
 # Optimalisasi Model
+
+Setelah SVM terbukti sebagai model terbaik, dilakukan hyperparameter tuning menggunakan GridSearchCV untuk mengoptimalkan kinerjanya. Parameter yang dituning meliputi nilai C (regularisasi), gamma (koefisien kernel), dan jenis kernel yang digunakan.
 """
 
 #Optimalisasi dengan cara hyperparameter tuning pada model terbaik menggunakan GridSearchCV
@@ -393,6 +447,8 @@ plt.ylabel("Score")
 plt.legend(loc="best")
 plt.grid()
 plt.show()
+
+"""Learning curve dari model SVM yang telah dioptimasi menunjukkan performa pelatihan yang konsisten sangat tinggi mendekati 1.0, serta peningkatan stabil pada skor validasi hingga mendekati 0.93. Hal ini mengindikasikan bahwa model telah belajar dengan baik tanpa overfitting yang berlebihan, serta peningkatan akurasi validasi sebagai hasil dari proses tuning parameter."""
 
 # menyimpan model SVM yang telah dilakukan tuning
 
