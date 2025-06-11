@@ -60,6 +60,16 @@ Adapun penjelasan masing-masing variabel pada dataset adalah sebagai berikut:
 
    ![image](https://github.com/user-attachments/assets/6d2daa59-3ff4-459d-a405-770c57fd63ab)
 
+- Jumlah Missing Value pada dataset Heart Disease Prediction terletak pada kolom 'alcohol intake' yang berjumlah 340
+
+  ![image](https://github.com/user-attachments/assets/40a624ee-8605-47b4-b9e6-1a0648213f6f)
+
+- Dataset Heart Disease Prediction tidak memiliki data duplikat dan outlier
+
+  ![image](https://github.com/user-attachments/assets/cba7b2f1-5309-4d5b-98ee-24c56f822cfd)
+
+
+
 ## Data Preparation
 Data Preparation
 Pada tahap ini, dilakukan serangkaian proses untuk menyiapkan data sebelum masuk ke proses pelatihan model. Langkah-langkah yang dilakukan disusun secara sistematis untuk memastikan data bersih, konsisten, dan relevan dengan tujuan klasifikasi. Berikut adalah tahapan data preparation yang dilakukan:
